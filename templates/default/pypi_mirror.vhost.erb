@@ -1,0 +1,6 @@
+server {
+       listen   80;
+       root <%= default[:pypi][:install_directory] %>/web;
+       index index.html index.htm;
+       autoindex on;
+}
