@@ -30,13 +30,13 @@ Usage
 -----
 #### pypi::default
 
-Just include `pypi` in your node's `run_list`:
+Just include `pypi-mirror` in your node's `run_list`:
 
 ```json
 {
   "name":"my_node",
   "run_list": [
-    "recipe[pypi]"
+    "recipe[pypi-mirror]"
   ]
 }
 ```
