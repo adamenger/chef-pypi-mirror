@@ -1,11 +1,11 @@
-pypi Cookbook
+Pypi Cookbook
 =============
 
 This cookbook sets up a mirror of pypi.python.org using the bandersnatch utility.
 
 Requirements
 ------------
-## Operating System:
+#### Operating System:
 Currently this cookbook is only designed to run on Debian/Ubuntu.
 
 #### Cookbooks:
