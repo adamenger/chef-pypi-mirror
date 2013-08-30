@@ -1,7 +1,7 @@
 Pypi Cookbook
 =============
 
-This cookbook sets up a mirror of pypi.python.org using the bandersnatch utility.
+This cookbook sets up a mirror of pypi.python.org using the bandersnatch utility. Additionally we use nginx to serve the html.
 
 Requirements
 ------------
@@ -22,7 +22,7 @@ Please keep this in mind and plan accordingly, we've successfully deployed to ex
 Attributes
 ----------
 * `default[:pypi][:username]` - User to run pypi as
-* `default[:pypi][:groupname]` - Group to run pypi as
+* `default[:pypi][:groupname]` - Group for pypi user
 * `default[:pypi][:install_directory]` - Install directory(pypi, virtualenv)
 * `default[:pypi][:mirror_directory]` - Mirror into this directory
 
