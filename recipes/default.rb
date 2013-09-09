@@ -2,7 +2,7 @@
 # Cookbook Name:: pypi
 # Recipe:: default
 #
-# Copyright 2013, skinnyCorp & Adam Enger
+# Copyright 2013, skinnyCorp & Adam Enger & Mike Steder
 #
 
 include_recipe 'python'
