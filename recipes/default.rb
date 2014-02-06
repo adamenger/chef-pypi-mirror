@@ -6,12 +6,15 @@
 #
 
 include_recipe 'python'
-
-package 'nginx'
+include_recipe 'nginx'
 
 directory node[:pypi][:install_directory] do
   user node[:pypi][:username]
   group node[:pypi][:groupname]
+end
+
+user node[:pypi][:username] do
+  action :create
 end
 
 template "#{node[:pypi][:install_directory]}/requirements.txt" do
@@ -27,9 +30,10 @@ python_virtualenv virtualenv do
   group node[:pypi][:groupname]
 end
 
-python_requirements "#{node[:pypi][:install_directory]}/requirements.txt" do
-  username node[:pypi][:username]
-  virtualenv_dir virtualenv
+
+python_pip "bandersnatch" do
+  action :install
+  virtualenv virtualenv
 end
 
 # pypi packages will be downloaded to this directory
@@ -53,18 +57,19 @@ template '/etc/bandersnatch.conf' do
   source 'bandersnatch.conf.erb'
 end
 
-execute "clean up left over nginx bits" do
-  command "rm -rf /etc/nginx/sites-{enabled,available}/*"
+template '/etc/nginx/sites-available/pypi_mirror' do
+  source 'pypi_mirror.vhost.erb'
+  notifies :reload, 'service[nginx]', :delayed
+  variables ({
+    :domain      => node[:pypi][:domain],
+    :mirror_dir  => node[:pypi][:mirror_directory]
+    })
 end
 
-template '/etc/nginx/sites-enabled/pypi_mirror' do
-  source 'pypi_mirror.vhost.erb'
-  notifies :restart, 'service[nginx]', :delayed
-end
+nginx_site 'pypi_mirror'
 
 service 'nginx' do
-  supports :restart => true, :stop => true, :start => true
-  action [:restart, :enable]
+  action :nothing
 end
 
 # configure cron to run bandersnatch mirror at 5:45 daily:
