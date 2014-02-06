@@ -1,6 +1,9 @@
 server {
        listen   80;
-       root <%= node[:pypi][:install_directory] %>/web;
-       index index.html index.htm;
-       autoindex on;
+       server_name <%= @domain %>;
+
+       location / {
+         root <%= @mirror_dir %>/web;
+         autoindex on;
+       }
 }
