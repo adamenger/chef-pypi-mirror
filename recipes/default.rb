@@ -5,6 +5,7 @@
 # Copyright 2013, skinnyCorp & Adam Enger & Mike Steder
 #
 
+include_recipe 'apt'
 include_recipe 'python'
 include_recipe 'nginx'
 
@@ -15,12 +16,6 @@ end
 
 user node[:pypi][:username] do
   action :create
-end
-
-template "#{node[:pypi][:install_directory]}/requirements.txt" do
-  source 'requirements.txt.erb'
-  user node[:pypi][:username]
-  group node[:pypi][:groupname]
 end
 
 virtualenv = "#{node[:pypi][:install_directory]}/env"
@@ -67,10 +62,6 @@ template '/etc/nginx/sites-available/pypi_mirror' do
 end
 
 nginx_site 'pypi_mirror'
-
-service 'nginx' do
-  action :nothing
-end
 
 # configure cron to run bandersnatch mirror at 5:45 daily:
 cron 'pypi_mirror' do
