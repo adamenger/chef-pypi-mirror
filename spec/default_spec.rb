@@ -13,12 +13,12 @@ describe 'pypi::default' do
     expect(chef_run).to include_recipe 'python::default'
   end
 
-  it 'should create a pypi directory' do
-    expect(chef_run).to create_directory '/mnt/pypi'
+  it 'should install bandersnatch' do
+    expect(chef_run).to install_package 'bandersnatch'
   end
 
-  it 'should create a requirements file' do
-    expect(chef_run).to create_file '/mnt/pypi/requirements.txt'
+  it 'should create a pypi directory' do
+    expect(chef_run).to create_directory '/mnt/pypi'
   end
 
   it 'should create a virtualenv' do
