@@ -39,7 +39,7 @@ directory node[:pypi][:mirror_directory] do
 end
 
 # web is created by the bandersnatch cronjob if it doesn't already exist
-# but to make sure that lighttpd has it's document root we'll create it
+# but to make sure that nginx has it's document root we'll create it
 # explicitly here:
 directory "#{node[:pypi][:mirror_directory]}/web" do
   user node[:pypi][:username]
