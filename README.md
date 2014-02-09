@@ -1,4 +1,4 @@
-Pypi Cookbook
+Pypi Mirror Cookbook
 =============
 
 This cookbook sets up a mirror of pypi.python.org using the bandersnatch utility. Nginx is installed to serve an autoindex on your pypi mirror directory.
