@@ -1,18 +1,20 @@
 Pypi Cookbook
 =============
 
-This cookbook sets up a mirror of pypi.python.org using the bandersnatch utility. Additionally we use nginx to serve the html.
+This cookbook sets up a mirror of pypi.python.org using the bandersnatch utility. Nginx is installed to serve an autoindex on your pypi mirror directory.
 
 Requirements
 ------------
-#### Operating System:
-Currently this cookbook is only designed to run on Debian/Ubuntu.
+#### Operating Systems:
+This cookbook has been tested on CentOS 6.4 and Ubuntu 12.04. 
 
 #### Cookbooks:
 
 I require the following cookbooks:
 
  - python
+ - nginx
+ - apt
 
 #### Misc
 
@@ -21,6 +23,7 @@ Please keep this in mind and plan accordingly, we've successfully deployed to ex
 
 Attributes
 ----------
+* `default[:pypi][:domain]` - Domain for NGINX to listen for requests
 * `default[:pypi][:username]` - User to run pypi as
 * `default[:pypi][:groupname]` - Group for pypi user
 * `default[:pypi][:install_directory]` - Install directory(pypi, virtualenv)
@@ -44,7 +47,7 @@ Just include `pypi-mirror` in your node's `run_list`:
 Tests
 -----
 #### rspec
-`rspec spec/default_spec.rb`
+`rspec spec/*_spec.rb`
 
 
 License and Authors
